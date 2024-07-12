@@ -1,43 +1,88 @@
 <p align="center">
   <a href="https://aluiziodeveloper.com.br/">
-    <img alt="Aluizio Developer" src="https://aluiziodeveloper.com.br/assets/img/icon.png" width="200" />
+    <img alt="Conex Networks" src="https://aluiziodeveloper.com.br/assets/img/icon.png" width="200" />
   </a>
 </p>
 <h2 align="center">
-Informação sobre tecnologia, dicas, tutoriais, mini-cursos e muito mais.
+Cursos, mini-cursos, dicas, tutoriais e muito mais.
 </h2>
 
-## Curso: Iniciando no desenvolvimento de API Node.js com Typescript
+## Curso: Registrando Logs em API Node.js com TypeScript e Pino
 
-Seja muito bem-vindo e bem-vinda ao curso: **Iniciando no desenvolvimento de API Node.js com Typescript**.
+Seja muito bem-vindo e bem-vinda ao curso: **Registrando Logs em API Node.js com TypeScript e Pino**.
 
-Eu sou o Jorge Aluizio e estarei contigo nessa jornada de aprendizado com o **Node.js**, **Typescript**, além de várias outras bibliotecas que utilizaremos ao longo do curso.
+Este repositório contém o projeto de uma API RESTFul desenvolvida com Node.js e Typescript, que servirá de base para a implementação dos recursos de logs durante o curso.
 
-Este repositório refere-se ao projeto **MyAPI**, desenvolvido durante o curso.
+### Instalando o projeto no seu PC
 
-## Rodando a aplicação no seu PC
+Instale o projeto em seu ambiente de desenvolvimento seguindo as etapas a seguir.
 
-Faça um clone deste repositório e instale no seu ambiente de desenvolvimento usando o seguinte comando no seu terminal (escolha um diretório apropriado):
+> NOTA: caso o seu PC esteja com Windows, recomendo trabalhar com um WSL Ubuntu. Acesse o link https://www.aluiziodeveloper.com.br/ambiente-de-desenvolvimento-no-windows-10-11-com-wsl/ para mais informações.
 
-```shell
-git clone https://github.com/aluiziodeveloper/nodejs-basico-myapi.git
-```
-
-Após clonar o conteúdo do repositório, acesse o diretório criado e efetue a instalação das dependências:
+1. No Shell, clonar o repositório do projeto em seu PC.
 
 ```shell
-cd nodejs-basico-myapi
-
-npm install
+git clone https://github.com/conexnetworks/nodejs-api-course.git nodejs-logger
 ```
 
-Após essa instalação execute a aplicação em ambiente de desenvolvimento devidamente configurado, através do comando `npm run dev`.
+2. No Shell, acessar a pasta do projeto e instalar as dependências com o `Npm`.
+
+```shell
+cd nodejs-logger
+
+npm ci
+```
+
+3. No Shell, executar o comando `code .` para abrir o Visual Studio Code com o projeto carregado.
+
+4. Criar o arquivo de variaveis de ambiente `.env` na pasta raiz do projeto, incluindo o conteúdo a seguir:
+
+```shell
+# Application
+PORT=3000
+API_URL=http://localhost:3000
+AVATAR_URL=http://localhost:3000/files
+
+# Access Token
+JWT_SECRET=my_secret_nodejs_logger
+JWT_EXPIRES_IN="1d"
+
+# Refresh Token
+REFRESH_SECRET=my_secret_nodejs_logger
+REFRESH_EXPIRES_IN="10m"
+REFRESH_DURATION=600000
+```
+
+### Executando o projeto em seu PC
+
+O projeto inicial está implementado considerando o uso de banco de dados `SQLite`. Antes de executar a aplicação, precisamos criar o banco de dados e criar a conta de usuário para administração da Api.
+
+1. Rodar o script para criação do banco de dados:
+
+```shell
+npm run typeorm -- -d ./src/shared/typeorm/index.ts migration:run
+```
+
+2. Rodar o script da `seed` que cria a conta de administração da Api:
+
+```shell
+npm run seed:admin
+```
+
+> A Seed cria o usuario `admin` com email `a@a.com` e senha `1234`.
+
+3. Executar o servidor e acessar a rota de login `/users/login` com o Insomnia ou qualquer outra ferramenta similar.
+
+```shell
+npm run dev
+```
+
 
 ## Redes Sociais
 
 [Site Aluizio Developer](https://aluiziodeveloper.com.br)
 
-[Perfil Udemy](https://aluiziodeveloper.com.br)
+[Perfil Udemy](https://www.udemy.com/user/jorge-aluizio-alves-de-souza/)
 
 [Cursos Gratuitos](https://letsgoahead.com.br/)
 
