@@ -12,10 +12,21 @@ import { makeLogger } from '../logger/pino/index'
 
 export const logger = makeLogger()
 
-// logger.info({
-//   type: 'debug',
-//   message: 'Ola Dev',
-// })
+const data = {
+  user: {
+    id: 'userid',
+    name: 'John Doe',
+    email: 'a@a.com',
+    password: '1234',
+    created_at: new Date(),
+  },
+}
+
+logger.info<typeof data>({
+  type: 'Info',
+  message: 'User info',
+  payload: data,
+})
 
 const app = express()
 app.use(cors())

@@ -17,6 +17,10 @@ export const fileTransport = pino.transport({
 export const pinoLogger = pino(
   {
     level: envConfig.logLevel,
+    redact: {
+      paths: ['user.name', 'user.email', 'user.password'],
+      remove: true,
+    },
   },
   fileTransport,
 )
