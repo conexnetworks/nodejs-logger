@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { ListRolesUseCase } from './ListRolesUseCase'
+import { logger } from '@shared/http/app'
 
 export class ListRolesController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -15,6 +16,12 @@ export class ListRolesController {
         : 15
 
     const roles = await listRolesUseCase.execute({ page, limit })
+
+    logger.info<typeof roles>({
+      type: 'Info',
+      message: 'List roles',
+      payload: roles,
+    })
     return response.json(roles)
   }
 }

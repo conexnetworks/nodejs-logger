@@ -21,12 +21,6 @@ export class CreateRoleUseCase {
       logger.error({ type: 'Error', message: 'Role already exists' })
       throw new AppError('Role already exists')
     }
-    const role = await this.rolesRepository.create({ name })
-    logger.info<typeof role>({
-      type: 'Info',
-      message: 'Role created',
-      payload: role,
-    })
-    return role
+    return this.rolesRepository.create({ name })
   }
 }
