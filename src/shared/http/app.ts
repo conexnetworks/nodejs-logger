@@ -10,7 +10,7 @@ import swaggerFile from '../../swagger.json'
 import '@shared/container'
 import uploadConfig from '@config/upload'
 import { makeLogger } from '../logger/pino/index'
-import { fileTransport } from '@shared/logger/pino/Logger'
+import { pinoTransport } from '@shared/logger/pino/Logger'
 
 export const logger = makeLogger()
 
@@ -43,7 +43,7 @@ app.use(
         remove: true,
       },
     },
-    fileTransport,
+    pinoTransport,
   ),
 )
 

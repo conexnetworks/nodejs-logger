@@ -2,10 +2,14 @@ import pino from 'pino'
 import { LogData, Logger } from '../types'
 import { envConfig } from '@config/env'
 
-export const fileTransport = pino.transport({
+export const pinoTransport = pino.transport({
   targets: [
     {
       target: 'pino-pretty',
+    },
+    {
+      target: '@logtail/pino',
+      options: { sourceToken: 'gsDp9BVES2Wg5ePhDNsJrs4o' },
     },
     {
       target: 'pino/file',
@@ -22,7 +26,7 @@ export const pinoLogger = pino(
       remove: true,
     },
   },
-  fileTransport,
+  pinoTransport,
 )
 
 const parseLoggerInputToPinoFormat = <T>({
