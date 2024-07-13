@@ -2,9 +2,24 @@ import pino from 'pino'
 import { LogData, Logger } from '../types'
 import { envConfig } from '@config/env'
 
-export const pinoLogger = pino({
-  level: envConfig.logLevel,
+export const fileTransport = pino.transport({
+  targets: [
+    {
+      target: 'pino-pretty',
+    },
+    {
+      target: 'pino/file',
+      options: { destination: `${__dirname}/../../../../api.log` },
+    },
+  ],
 })
+
+export const pinoLogger = pino(
+  {
+    level: envConfig.logLevel,
+  },
+  fileTransport,
+)
 
 const parseLoggerInputToPinoFormat = <T>({
   message,
