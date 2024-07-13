@@ -1,8 +1,9 @@
 import pino from 'pino'
 import { LogData, Logger } from '../types'
+import { envConfig } from '@config/env'
 
-const pinoLogger = pino({
-  level: 'debug',
+export const pinoLogger = pino({
+  level: envConfig.logLevel,
 })
 
 const parseLoggerInputToPinoFormat = <T>({
