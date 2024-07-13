@@ -10,12 +10,12 @@ import '@shared/container'
 import uploadConfig from '@config/upload'
 import { makeLogger } from '../logger/pino/index'
 
-const logger = makeLogger()
+export const logger = makeLogger()
 
-logger.debug({
-  type: 'debug',
-  message: 'Ola Dev',
-})
+// logger.info({
+//   type: 'debug',
+//   message: 'Ola Dev',
+// })
 
 const app = express()
 app.use(cors())
