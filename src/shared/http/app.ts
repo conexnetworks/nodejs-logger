@@ -27,12 +27,14 @@ app.use(errors())
 app.use(
   (error: Error, request: Request, response: Response, next: NextFunction) => {
     if (error instanceof AppError) {
+      logger.error({ type: 'Error', error })
       return response.status(error.statusCode).json({
         status: 'error',
         message: error.message,
       })
     }
     console.log(error)
+    logger.error({ type: 'Error', error: error as unknown as AppError })
     return response.status(500).json({
       status: 'error',
       message: 'Internal server error',
